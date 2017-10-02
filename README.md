@@ -84,3 +84,5 @@ RIZA ISIK WAS HERE
 MUHAMMET ALI ERSEN
 
 Yunus Can Basesme
+
+Fatih Metin
