@@ -2,12 +2,7 @@ package org.mafagafogigante.dungeon.entity.items;
 
 import org.mafagafogigante.dungeon.date.Date;
 import org.mafagafogigante.dungeon.date.Duration;
-import org.mafagafogigante.dungeon.entity.EnchantmentFactory;
-import org.mafagafogigante.dungeon.entity.Entity;
-import org.mafagafogigante.dungeon.entity.LightSource;
-import org.mafagafogigante.dungeon.entity.Luminosity;
-import org.mafagafogigante.dungeon.entity.TagSet;
-import org.mafagafogigante.dungeon.entity.Weight;
+import org.mafagafogigante.dungeon.entity.*;
 import org.mafagafogigante.dungeon.game.Game;
 import org.mafagafogigante.dungeon.game.Id;
 import org.mafagafogigante.dungeon.game.Name;
@@ -35,10 +30,13 @@ public final class Item extends Entity {
   private BookComponent bookComponent;
   /* The Inventory this Item is in. Should be null whenever this Item is not in an Inventory. */
   private BaseInventory inventory;
+  //ycb
+  private int level;
 
   /**
    * Constructs a new Item from the provided preset and with the specified creation date.
    */
+  //ycb
   public Item(ItemPreset preset, Date date, EnchantmentFactory enchantmentFactory) {
     super(preset);
     rarity = preset.getRarity();
@@ -51,7 +49,7 @@ public final class Item extends Entity {
       int damage = preset.getDamage();
       Percentage hitRate = preset.getHitRate();
       int integrityDecrementOnHit = preset.getIntegrityDecrementOnHit();
-      weaponComponent = new WeaponComponent(damage, hitRate, integrityDecrementOnHit);
+      weaponComponent = new WeaponComponent(damage, hitRate, integrityDecrementOnHit,level);
     }
     if (hasTag(Tag.FOOD)) {
       foodComponent = new FoodComponent(preset.getNutrition(), preset.getIntegrityDecrementOnEat());
@@ -151,6 +149,9 @@ public final class Item extends Entity {
   public void setInventory(BaseInventory inventory) {
     this.inventory = inventory;
   }
+
+  //ycb
+  public int getLevel(){ return level; }
 
   /**
    * Returns whether or not this item is broken.
