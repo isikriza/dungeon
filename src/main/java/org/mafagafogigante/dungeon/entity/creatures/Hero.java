@@ -1,30 +1,16 @@
 package org.mafagafogigante.dungeon.entity.creatures;
 
-import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.HOUR;
-import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.SECOND;
-
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.mafagafogigante.dungeon.achievements.AchievementTracker;
 import org.mafagafogigante.dungeon.date.Date;
 import org.mafagafogigante.dungeon.date.Duration;
+import org.mafagafogigante.dungeon.entity.DamageAmount;
 import org.mafagafogigante.dungeon.entity.Enchantment;
 import org.mafagafogigante.dungeon.entity.Entity;
-import org.mafagafogigante.dungeon.entity.items.BaseInventory;
-import org.mafagafogigante.dungeon.entity.items.BookComponent;
+import org.mafagafogigante.dungeon.entity.items.*;
 import org.mafagafogigante.dungeon.entity.items.CreatureInventory.SimulationResult;
-import org.mafagafogigante.dungeon.entity.items.DrinkableComponent;
-import org.mafagafogigante.dungeon.entity.items.FoodComponent;
-import org.mafagafogigante.dungeon.entity.items.Item;
-import org.mafagafogigante.dungeon.game.DungeonString;
-import org.mafagafogigante.dungeon.game.Engine;
-import org.mafagafogigante.dungeon.game.Game;
-import org.mafagafogigante.dungeon.game.Id;
-import org.mafagafogigante.dungeon.game.Location;
-import org.mafagafogigante.dungeon.game.Name;
-import org.mafagafogigante.dungeon.game.NameFactory;
-import org.mafagafogigante.dungeon.game.PartOfDay;
-import org.mafagafogigante.dungeon.game.QuantificationMode;
-import org.mafagafogigante.dungeon.game.Random;
-import org.mafagafogigante.dungeon.game.World;
+import org.mafagafogigante.dungeon.game.*;
 import org.mafagafogigante.dungeon.io.Sleeper;
 import org.mafagafogigante.dungeon.io.Version;
 import org.mafagafogigante.dungeon.io.Writer;
@@ -36,15 +22,15 @@ import org.mafagafogigante.dungeon.util.Matches;
 import org.mafagafogigante.dungeon.util.Messenger;
 import org.mafagafogigante.dungeon.util.Utils;
 import org.mafagafogigante.dungeon.util.library.Libraries;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.awt.Color;
+import org.mafagafogigante.dungeon.game.Random;
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+//import java.util.Random;
 
+import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.HOUR;
+import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.SECOND;
 /**
  * Hero class that defines the creature that the player controls.
  */
@@ -732,6 +718,39 @@ public class Hero extends Creature {
       HeroUtils.writeNoLongerInInventoryMessage(weapon);
     }
   }
+  //ycb
+  /*
+    85-100 : cok basarili
+  * 50-85 : basarili
+  * 15-50 : basarisiz
+  * 0-15 : cok basarisiz
+  * basari : (1/level)x(Random(0-levelx100))
+  * */
+  /*public void improve(Item weapon){
+    if(getInventory().hasItem(weapon)){
+      int level = weapon.getLevel();
+      Random generator = new Random();
+      int randomNumber = generator.nextInt(level*100);
+      int luck = (1/level)*randomNumber;
+      if(luck>=0 && luck<15){
+
+      }
+      else if(luck>=15 && luck<50){
+
+      }
+      else if(luck>=50 && luck<85){
+
+      }
+      else if(luck>=85 && luck<100){
+
+      }
+    }
+    else{
+      DungeonString string = new DungeonString();
+      string.append(weapon.getName() + "is not in your inventory.");
+      Writer.write(string);
+    }
+  }*/
 
   /**
    * Unequips the currently equipped weapon.

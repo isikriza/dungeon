@@ -1,9 +1,6 @@
 package org.mafagafogigante.dungeon.entity.items;
 
-import org.mafagafogigante.dungeon.entity.Damage;
-import org.mafagafogigante.dungeon.entity.DamageAmount;
-import org.mafagafogigante.dungeon.entity.DamageType;
-import org.mafagafogigante.dungeon.entity.Enchantment;
+import org.mafagafogigante.dungeon.entity.*;
 import org.mafagafogigante.dungeon.io.Version;
 import org.mafagafogigante.dungeon.util.Percentage;
 
@@ -21,14 +18,18 @@ public class WeaponComponent implements Serializable {
   private final Percentage hitRate;
   private final int integrityDecrementOnHit;
   private final List<Enchantment> enchantments = new ArrayList<>();
+  //ycb
+  private final int level;
 
   /**
    * Constructs a new WeaponComponent.
    */
-  WeaponComponent(int damage, Percentage hitRate, int integrityDecrementOnHit) {
+  //ycb
+  WeaponComponent(int damage, Percentage hitRate, int integrityDecrementOnHit, int level) {
     this.damage = damage;
     this.hitRate = hitRate;
     this.integrityDecrementOnHit = integrityDecrementOnHit;
+    this.level = level;
   }
 
   /**
@@ -45,6 +46,11 @@ public class WeaponComponent implements Serializable {
       total += damageAmount.getAmount();
     }
     return total;
+  }
+
+  //ycb
+  public int getLevel() {
+    return level;
   }
 
   public Percentage getHitRate() {
