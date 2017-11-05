@@ -161,6 +161,12 @@ final class CommandSets {
         Game.getGameState().getHero().attackTarget(arguments);
       }
     });
+    commandSet.addCommand((new Command("pet", "Tame the target chosen by the player.") {
+      @Override
+      public void execute(@NotNull String[] arguments)  {
+        Game.getGameState().getHero().tameTarget(arguments);
+      }
+    }));
     commandSet.addCommand(new Command("load", "Loads a saved game.") {
       @Override
       public void execute(@NotNull String[] arguments) {
