@@ -1,16 +1,30 @@
 package org.mafagafogigante.dungeon.entity.creatures;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.HOUR;
+import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.SECOND;
+
 import org.mafagafogigante.dungeon.achievements.AchievementTracker;
 import org.mafagafogigante.dungeon.date.Date;
 import org.mafagafogigante.dungeon.date.Duration;
-import org.mafagafogigante.dungeon.entity.DamageAmount;
 import org.mafagafogigante.dungeon.entity.Enchantment;
 import org.mafagafogigante.dungeon.entity.Entity;
-import org.mafagafogigante.dungeon.entity.items.*;
+import org.mafagafogigante.dungeon.entity.items.BaseInventory;
+import org.mafagafogigante.dungeon.entity.items.BookComponent;
 import org.mafagafogigante.dungeon.entity.items.CreatureInventory.SimulationResult;
-import org.mafagafogigante.dungeon.game.*;
+import org.mafagafogigante.dungeon.entity.items.DrinkableComponent;
+import org.mafagafogigante.dungeon.entity.items.FoodComponent;
+import org.mafagafogigante.dungeon.entity.items.Item;
+import org.mafagafogigante.dungeon.game.DungeonString;
+import org.mafagafogigante.dungeon.game.Engine;
+import org.mafagafogigante.dungeon.game.Game;
+import org.mafagafogigante.dungeon.game.Id;
+import org.mafagafogigante.dungeon.game.Location;
+import org.mafagafogigante.dungeon.game.Name;
+import org.mafagafogigante.dungeon.game.NameFactory;
+import org.mafagafogigante.dungeon.game.PartOfDay;
+import org.mafagafogigante.dungeon.game.QuantificationMode;
+import org.mafagafogigante.dungeon.game.Random;
+import org.mafagafogigante.dungeon.game.World;
 import org.mafagafogigante.dungeon.io.Sleeper;
 import org.mafagafogigante.dungeon.io.Version;
 import org.mafagafogigante.dungeon.io.Writer;
@@ -22,15 +36,21 @@ import org.mafagafogigante.dungeon.util.Matches;
 import org.mafagafogigante.dungeon.util.Messenger;
 import org.mafagafogigante.dungeon.util.Utils;
 import org.mafagafogigante.dungeon.util.library.Libraries;
-import org.mafagafogigante.dungeon.game.Random;
-import java.awt.*;
+
+
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-//import java.util.Random;
 
-import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.HOUR;
-import static org.mafagafogigante.dungeon.date.DungeonTimeUnit.SECOND;
+
+
+
+
 /**
  * Hero class that defines the creature that the player controls.
  */
