@@ -10,6 +10,7 @@ public class WeaponEnchantmentPreset implements Serializable {
   private final String name;
   private final DamageAmount damageAmount;
 
+  //ycb
   public WeaponEnchantmentPreset(String name, DamageType type, int amount) {
     this.name = name;
     this.damageAmount = new DamageAmount(type, amount);

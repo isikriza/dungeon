@@ -161,6 +161,12 @@ final class CommandSets {
         Game.getGameState().getHero().attackTarget(arguments);
       }
     });
+    commandSet.addCommand((new Command("pet", "Tame the target chosen by the player.") {
+      @Override
+      public void execute(@NotNull String[] arguments)  {
+        Game.getGameState().getHero().tameTarget(arguments);
+      }
+    }));
     commandSet.addCommand(new Command("load", "Loads a saved game.") {
       @Override
       public void execute(@NotNull String[] arguments) {
@@ -502,6 +508,14 @@ final class CommandSets {
     });
     return commandSet;
   }
+
+  //ycb
+ /*commandSet.addCommand(new Command("improve", "Improves the weapon s attributes that you want.") {
+    @Override
+    public void execute(@NotNull String[] arguments) {
+      Game.getGameState().getStatistics().writeStatistics();
+    }
+  });*/
 
   static boolean hasCommandSet(String identifier) {
     return commandSetMap.containsKey(identifier);

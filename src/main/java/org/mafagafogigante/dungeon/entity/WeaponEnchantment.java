@@ -15,6 +15,7 @@ public class WeaponEnchantment implements Enchantment, Serializable {
     this.amount = amount;
   }
 
+
   @Override
   public String getName() {
     return name;
@@ -29,5 +30,4 @@ public class WeaponEnchantment implements Enchantment, Serializable {
   public void modifyAttackDamage(Damage damage) {
     damage.getAmounts().add(amount);
   }
-
 }
