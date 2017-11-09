@@ -237,6 +237,128 @@
       "integrityDecrementPerDose": 5
     },
     {
+      "id": "BIG_RED_POT",
+      "type": "Potion",
+      "name": {
+        "singular": "Big Red Pot"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON",
+        "DRINKABLE",
+        "WEIGHT_PROPORTIONAL_TO_INTEGRITY"
+      ],
+      "integrity": {
+        "current": 10,
+        "maximum": 10
+      },
+      "weight": 0.2,
+      "visibility": "100.00%",
+      "damage": 0,
+      "hitRate": "50.00%",
+      "integrityDecrementOnHit": 5,
+      "drinkableDoses": 2,
+      "drinkableEffects": [
+        [
+          "HEALING",
+          50
+        ]
+      ],
+      "integrityDecrementPerDose": 5
+    },
+    {
+      "id": "MEDIUM_RED_POT",
+      "type": "Potion",
+      "name": {
+        "singular": "Medium Red Pot"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON",
+        "DRINKABLE",
+        "WEIGHT_PROPORTIONAL_TO_INTEGRITY"
+      ],
+      "integrity": {
+        "current": 10,
+        "maximum": 10
+      },
+      "weight": 0.2,
+      "visibility": "100.00%",
+      "damage": 0,
+      "hitRate": "50.00%",
+      "integrityDecrementOnHit": 5,
+      "drinkableDoses": 2,
+      "drinkableEffects": [
+        [
+          "HEALING",
+          25
+        ]
+      ],
+      "integrityDecrementPerDose": 5
+    },
+    {
+      "id": "GREEN_POT",
+      "type": "Potion",
+      "name": {
+        "singular": "Green Pot"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON",
+        "DRINKABLE",
+        "WEIGHT_PROPORTIONAL_TO_INTEGRITY"
+      ],
+      "integrity": {
+        "current": 10,
+        "maximum": 10
+      },
+      "weight": 0.2,
+      "visibility": "100.00%",
+      "damage": 0,
+      "hitRate": "50.00%",
+      "integrityDecrementOnHit": 5,
+      "drinkableDoses": 2,
+      "drinkableEffects": [
+        [
+          "EXTRA_ATTACK",
+          4,
+          "5 minutes"
+        ]
+      ],
+      "integrityDecrementPerDose": 5
+    },
+    {
+      "id": "BLUE_POT",
+      "type": "Potion",
+      "name": {
+        "singular": "Blue Pot"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON",
+        "DRINKABLE",
+        "WEIGHT_PROPORTIONAL_TO_INTEGRITY"
+      ],
+      "integrity": {
+        "current": 10,
+        "maximum": 10
+      },
+      "weight": 0.2,
+      "visibility": "100.00%",
+      "damage": 0,
+      "hitRate": "50.00%",
+      "integrityDecrementOnHit": 5,
+      "drinkableDoses": 2,
+      "drinkableEffects": [
+        [
+          "EXTRA_ATTACK",
+          4,
+          "5 minutes"
+        ]
+      ],
+      "integrityDecrementPerDose": 5
+    },
+    {
       "id": "HEALING_DRAUGHT",
       "type": "Potion",
       "name": {

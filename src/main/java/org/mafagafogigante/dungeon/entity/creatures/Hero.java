@@ -275,6 +275,32 @@ public class Hero extends Creature {
   }
 
   /**
+   * Issues this Hero to tame a target.
+   */
+  public void tameTarget(String[] arguments) {
+    Creature target = selectTarget(arguments);
+    if (isReclaimableTarget(arguments)) {
+      System.out.println("Target: " + target);
+    } else {
+      attackTarget(arguments);
+    }
+  }
+
+  /**
+   * Currently running at 20% probability.
+   */
+  private boolean isReclaimableTarget(String[] arguments) {
+    Creature target = selectTarget(arguments);
+    if (target != null) {
+      int random = (int) ((Math.random() * 10) + 1);
+      if (random == 1 || random == 2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * Attempts to select a target from the current location using the player input.
    *
    * @return a target Creature or {@code null}

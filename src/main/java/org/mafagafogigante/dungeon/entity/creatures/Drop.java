@@ -13,7 +13,7 @@ import java.io.Serializable;
 class Drop implements Serializable {
 
   private static final long serialVersionUID = Version.MAJOR;
-  private final Id itemId;
+  private final Id itemId ;
   private final Percentage probability;
 
   public Drop(Id itemId, Percentage probability) {
