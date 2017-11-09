@@ -17,7 +17,7 @@ class Drop implements Serializable {
   private final Percentage probability;
 
   public Drop(Id itemId, Percentage probability) {
-    this.itemId = new Id("SMALL_RED_POT");
+    this.itemId = itemId;
     this.probability = probability;
   }
 
