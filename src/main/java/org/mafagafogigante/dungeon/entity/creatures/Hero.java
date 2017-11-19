@@ -86,6 +86,7 @@ public class Hero extends Creature {
   private final AchievementTracker achievementTracker;
   private final Statistics statistics;
   private final Date dateOfBirth;
+  private Creature pet;
 
   Hero(CreaturePreset preset, Statistics statistics, Date dateOfBirth) {
     super(preset);
@@ -93,6 +94,7 @@ public class Hero extends Creature {
     this.achievementTracker = new AchievementTracker(statistics);
     this.dateOfBirth = dateOfBirth;
     this.battleLog = new SimpleBattleLog();
+    this.pet = null;
   }
 
   private static int nextRandomTimeChunk() {
@@ -270,7 +272,7 @@ public class Hero extends Creature {
   public void attackTarget(String[] arguments) {
     Creature target = selectTarget(arguments);
     if (target != null) {
-      Engine.battle(this, target);
+      Engine.battle(this, target, pet);
     }
   }
 
@@ -279,21 +281,20 @@ public class Hero extends Creature {
    */
   public void tameTarget(String[] arguments) {
     Creature target = selectTarget(arguments);
-    if (isReclaimableTarget(arguments)) {
-      System.out.println("Target: " + target);
+    if (isReclaimableTarget(target)) {
+      pet = target;
     } else {
       attackTarget(arguments);
     }
   }
 
   /**
-   * Currently running at 20% probability.
+   * Currently running at target's attack dmg probability.
    */
-  private boolean isReclaimableTarget(String[] arguments) {
-    Creature target = selectTarget(arguments);
+  private boolean isReclaimableTarget(Creature target) {
     if (target != null) {
-      int random = (int) ((Math.random() * 10) + 1);
-      if (random == 1 || random == 2) {
+      int tame = (int) (1.0 / target.getAttack() * 100);
+      if (Random.nextInteger(100) <= tame) {
         return true;
       }
     }

@@ -75,7 +75,7 @@ public final class Engine {
   /**
    * Ends the turn, refreshing the game state and checking if any achievements were unlocked.
    */
-  public static void endTurn() {
+  static void endTurn() {
     silentRefresh();
     refreshAchievements();
   }
@@ -108,19 +108,37 @@ public final class Engine {
    * @param hero the attacker
    * @param foe the defender
    */
-  public static void battle(Hero hero, Creature foe) {
+  public static void battle(Hero hero, Creature foe, Creature pet) {
     if (hero == foe) {
       Writer.write(new DungeonString("You cannot attempt suicide."));
       return;
     }
     while (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
-      hero.hit(foe);
-      Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
-      // No contract specifies that calling hit on the Hero will not kill it, so check both creatures again.
-      // Additionally, rolling the date forward may kill the hero in the future.
-      if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
-        foe.hit(hero);
+      if (pet != null) {
+        if (pet.getHealth().isAlive()) {
+          pet.hit(foe);
+          Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+        }
+        hero.hit(foe);
         Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+        if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
+          if (pet.getHealth().isAlive()) {
+            foe.hit(pet);
+            Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+          } else {
+            foe.hit(hero);
+            Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+          }
+        }
+      } else {
+        hero.hit(foe);
+        Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+        // No contract specifies that calling hit on the Hero will not kill it, so check both creatures again.
+        // Additionally, rolling the date forward may kill the hero in the future.
+        if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
+          foe.hit(hero);
+          Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+        }
       }
     }
     Creature survivor = hero.getHealth().isAlive() ? hero : foe;
