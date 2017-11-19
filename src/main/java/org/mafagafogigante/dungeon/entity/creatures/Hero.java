@@ -739,39 +739,44 @@ public class Hero extends Creature {
       HeroUtils.writeNoLongerInInventoryMessage(weapon);
     }
   }
-  //ycb
-  /*
-    85-100 : cok basarili
-  * 50-85 : basarili
-  * 15-50 : basarisiz
-  * 0-15 : cok basarisiz
-  * basari : (1/level)x(Random(0-levelx100))
-  * */
-  /*public void improve(Item weapon){
-    if(getInventory().hasItem(weapon)){
-      int level = weapon.getLevel();
-      Random generator = new Random();
-      int randomNumber = generator.nextInt(level*100);
-      int luck = (1/level)*randomNumber;
-      if(luck>=0 && luck<15){
 
+    /**
+     *Improves the currently equipped weapon.
+     */
+  public void improveWeapon(Hero hero, String[] targetMatcher) {
+    int changeFactor = 5;
+    int upgradeDamage = 10;
+    if (targetMatcher.length != 0 && hero.getWeapon() != null) {
+      int level = hero.getWeapon().getWeaponComponent().getLevel();
+      int randomNumber = (int) ((Math.random() * level) + 1);
+      int luck = (1 / level) * randomNumber;
+      if (luck >= 0 && luck < 15) {
+        hero.getInventory().removeItem(hero.getWeapon());
+        Writer.write("You could not succeed to upgrade the weapon and you broke it.");
+      } else if (luck >= 15 && luck < 50) {
+        int newDamage = hero.getWeapon().getWeaponComponent().getDamage() - changeFactor;
+        hero.getWeapon().getWeaponComponent().setDamage(newDamage);
+        Writer.write("You could not succeed to upgrade the weapon and you gave damage your weapon.");
+        Writer.write("Your weapon loss " + changeFactor + " damage.");
+        Writer.write("Your weapon's new damage is: " + newDamage);
+      } else if (luck >= 50 && luck < 85) {
+        int newDamage = hero.getWeapon().getWeaponComponent().getDamage() + changeFactor;
+        hero.getWeapon().getWeaponComponent().setDamage(newDamage);
+        Writer.write("You succeed to upgrade the weapon.");
+        Writer.write("Your weapon gain " + changeFactor + " damage.");
+        Writer.write("Your weapon's new damage is: " + newDamage);
+      } else if (luck >= 85 && luck < 100) {
+        int newDamage = hero.getWeapon().getWeaponComponent().getDamage() + upgradeDamage;
+        hero.getWeapon().getWeaponComponent().setDamage(newDamage);
+        Writer.write("You succeed to upgrade the weapon like a blacksmith.");
+        Writer.write("Your weapon gain " + upgradeDamage + " damage.");
+        Writer.write("Your weapon's new damage is: " + newDamage);
       }
-      else if(luck>=15 && luck<50){
-
-      }
-      else if(luck>=50 && luck<85){
-
-      }
-      else if(luck>=85 && luck<100){
-
-      }
+      hero.getWeapon().getWeaponComponent().setLevel(level + 1);
+      Writer.write("Your weapon is level " + ( level + 1 ) + " now.");
     }
-    else{
-      DungeonString string = new DungeonString();
-      string.append(weapon.getName() + "is not in your inventory.");
-      Writer.write(string);
-    }
-  }*/
+  }
+
 
   /**
    * Unequips the currently equipped weapon.

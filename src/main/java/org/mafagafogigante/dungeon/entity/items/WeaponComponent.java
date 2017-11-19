@@ -18,12 +18,12 @@ import java.util.List;
 public class WeaponComponent implements Serializable {
 
   private static final long serialVersionUID = Version.MAJOR;
-  private final int damage;
+  private int damage;
   private final Percentage hitRate;
   private final int integrityDecrementOnHit;
   private final List<Enchantment> enchantments = new ArrayList<>();
   //ycb
-  private final int level;
+  private int level;
 
   /**
    * Constructs a new WeaponComponent.
@@ -69,4 +69,18 @@ public class WeaponComponent implements Serializable {
     return enchantments;
   }
 
+  public void setDamage(int damage) {
+    this.damage = damage;
+  }
+
+  public void setLevel(int level) {
+    this.level = level;
+  }
+
+  public void removeItem(Item item) {
+    item.setInventory(null);
+  }
+
 }
+
+

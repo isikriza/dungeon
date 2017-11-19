@@ -1632,6 +1632,29 @@
       "integrityDecrementOnHit": 2
     },
     {
+      "id": "IRON",
+      "type": "Misc",
+      "name": {
+        "singular": "Iron"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON",
+        "DECOMPOSES"
+      ],
+      "integrity": {
+        "current": 15,
+        "maximum": 15
+      },
+      "weight": 0.9,
+      "visibility": "90.00%",
+      "luminosity": "10.00%",
+      "decompositionPeriod": "10 days",
+      "damage": 6,
+      "hitRate": "50.00%",
+      "integrityDecrementOnHit": 1
+    },
+    {
       "id": "HARPY_FEATHER",
       "type": "Misc",
       "name": {

@@ -12,7 +12,8 @@
       "inventoryItemLimit": 12,
       "inventoryWeightLimit": 10,
       "inventory": [
-        "POTATO"
+        "POTATO",
+        "IRON"
       ],
       "visibility": "70%",
       "weight": 60.0,
@@ -420,6 +421,25 @@
       "attack": 10,
       "attackAlgorithmID": "ORC",
       "weapon": "ORC_SWORD"
+    },
+    {
+      "id": "UNGOLIANT",
+      "type": "Beast",
+      "name": {
+        "singular": "Ungoliant"
+      },
+      "tags": [
+        "CORPSE"
+      ],
+      "drops": [
+        ["SPIDER_VENOM_GLAND", 0.2],
+        ["IRON", 1]
+      ],
+      "visibility": "90%",
+      "weight": 300.0,
+      "health": 100,
+      "attack": 5,
+      "attackAlgorithmID": "SIMPLE"
     },
     {
       "id": "ZOMBIE",

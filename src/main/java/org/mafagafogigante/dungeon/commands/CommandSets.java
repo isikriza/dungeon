@@ -506,16 +506,14 @@ final class CommandSets {
         DebugWaitParser.parseDebugWait(arguments);
       }
     });
+    commandSet.addCommand(new Command("improve", "Improves the weapon s attributes that you want.") {
+      @Override
+      public void execute(@NotNull String[] arguments)  {
+        Game.getGameState().getHero().improveWeapon(Game.getGameState().getHero(), arguments);
+      }
+    });
     return commandSet;
   }
-
-  //ycb
- /*commandSet.addCommand(new Command("improve", "Improves the weapon s attributes that you want.") {
-    @Override
-    public void execute(@NotNull String[] arguments) {
-      Game.getGameState().getStatistics().writeStatistics();
-    }
-  });*/
 
   static boolean hasCommandSet(String identifier) {
     return commandSetMap.containsKey(identifier);
