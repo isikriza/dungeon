@@ -87,6 +87,7 @@ public class Hero extends Creature {
   private final Statistics statistics;
   private final Date dateOfBirth;
   private Creature pet;
+  private boolean controlWriterMessages = false;
 
   Hero(CreaturePreset preset, Statistics statistics, Date dateOfBirth) {
     super(preset);
@@ -425,7 +426,9 @@ public class Hero extends Creature {
         dropItem(item); // Just drop it if has not disappeared.
       }
       // The character "dropped" the item even if it disappeared while doing it, so write about it.
-      Writer.write(String.format("Dropped %s.", item.getQualifiedName()));
+      if (!controlWriterMessages) {
+        Writer.write(String.format("Dropped %s.", item.getQualifiedName()));
+      }
     }
   }
 
@@ -632,6 +635,10 @@ public class Hero extends Creature {
       text.append(String.valueOf(selectedItem.getWeaponComponent().getDamage()));
       text.append(".");
       text.append("\n");
+      text.append("The level of this item is ");
+      text.append(String.valueOf(selectedItem.getWeaponComponent().getLevel()));
+      text.append(".");
+      text.append("\n");
       text.append("The base hit rate of this item is ");
       text.append(String.valueOf(selectedItem.getWeaponComponent().getHitRate()));
       text.append(".");
@@ -703,7 +710,10 @@ public class Hero extends Creature {
         Engine.rollDateAndRefresh(SECONDS_TO_HIT_AN_ITEM);
       }
       String verb = target.hasTag(Item.Tag.REPAIRABLE) ? "crashed" : "destroyed";
-      Writer.write(getName() + " " + verb + " " + nameBeforeAction + ".");
+      if (!controlWriterMessages) {
+        Writer.write(getName() + " " + verb + " " + nameBeforeAction + ".");
+        controlWriterMessages = false;
+      }
     }
   }
 
@@ -743,15 +753,29 @@ public class Hero extends Creature {
     /**
      *Improves the currently equipped weapon.
      */
-  public void improveWeapon(Hero hero, String[] targetMatcher) {
+  public void improveWeapon(Hero hero, String[] arguments) {
     int changeFactor = 5;
     int upgradeDamage = 10;
-    if (targetMatcher.length != 0 && hero.getWeapon() != null) {
-      int level = hero.getWeapon().getWeaponComponent().getLevel();
-      int randomNumber = (int) ((Math.random() * level) + 1);
-      int luck = (1 / level) * randomNumber;
+    boolean controlForBrokenWeapon = false;
+    if (arguments.length == 1 && hero.getWeapon() != null) {
+      String weaponNameString = "";
+      weaponNameString += getWeapon().getName();
+      if (!weaponNameString.equalsIgnoreCase(arguments[0])) {
+        Writer.write("You are not equipping this weapon.");
+        return;
+      }
+      int level = hero.getWeapon().getWeaponComponent().getLevel() + 1;
+      int randomNumber = (int) ((Math.random() * 100) + 1);
+      int luck = randomNumber - (level * 4);
+      if (luck < 0) {
+        luck = 0;
+      }
       if (luck >= 0 && luck < 15) {
-        hero.getInventory().removeItem(hero.getWeapon());
+        hero.getWeapon().getWeaponComponent().setDamage(0);
+        controlWriterMessages = true;
+        hero.dropItems(arguments);
+        hero.destroyItems(arguments);
+        controlForBrokenWeapon = true;
         Writer.write("You could not succeed to upgrade the weapon and you broke it.");
       } else if (luck >= 15 && luck < 50) {
         int newDamage = hero.getWeapon().getWeaponComponent().getDamage() - changeFactor;
@@ -772,8 +796,18 @@ public class Hero extends Creature {
         Writer.write("Your weapon gain " + upgradeDamage + " damage.");
         Writer.write("Your weapon's new damage is: " + newDamage);
       }
-      hero.getWeapon().getWeaponComponent().setLevel(level + 1);
-      Writer.write("Your weapon is level " + ( level + 1 ) + " now.");
+      if (!controlForBrokenWeapon) {
+        hero.getWeapon().getWeaponComponent().setLevel(level);
+        Writer.write("Your weapon is level " + level + " now.");
+      }
+    } else {
+      if (arguments.length != 1) {
+        Writer.write("You should improve only one weapon at a time.");
+        Writer.write("Or if you trying to improve a broken weapon, you can not do it.");
+      } else {
+        Writer.write("You are not equipping any weapon.");
+      }
+
     }
   }
 

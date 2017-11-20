@@ -149,6 +149,12 @@ final class CommandSets {
         Game.getGameState().getHero().walk(arguments);
       }
     });
+    commandSet.addCommand(new Command("improve", "Improves the currently equipped weapon's damage.") {
+      @Override
+      public void execute(@NotNull String[] arguments)  {
+        Game.getGameState().getHero().improveWeapon(Game.getGameState().getHero(), arguments);
+      }
+    });
     commandSet.addCommand(new Command("items", "Lists the items in the character's inventory.") {
       @Override
       public void execute(@NotNull String[] arguments) {
@@ -504,12 +510,6 @@ final class CommandSets {
       @Override
       public void execute(@NotNull String[] arguments) {
         DebugWaitParser.parseDebugWait(arguments);
-      }
-    });
-    commandSet.addCommand(new Command("improve", "Improves the weapon s attributes that you want.") {
-      @Override
-      public void execute(@NotNull String[] arguments)  {
-        Game.getGameState().getHero().improveWeapon(Game.getGameState().getHero(), arguments);
       }
     });
     return commandSet;

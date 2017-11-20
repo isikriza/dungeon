@@ -156,10 +156,7 @@ public final class Item extends Entity {
     this.inventory = inventory;
   }
 
-  //ycb
-  public int getLevel() {
-    return level;
-  }
+  
 
   /**
    * Returns whether or not this item is broken.

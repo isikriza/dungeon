@@ -24,7 +24,6 @@ public class WeaponComponent implements Serializable {
   private final List<Enchantment> enchantments = new ArrayList<>();
   //ycb
   private int level;
-
   /**
    * Constructs a new WeaponComponent.
    */
@@ -77,9 +76,10 @@ public class WeaponComponent implements Serializable {
     this.level = level;
   }
 
-  public void removeItem(Item item) {
+  /*public void removeItem(Item item) {
     item.setInventory(null);
-  }
+
+  }*/
 
 }
 
