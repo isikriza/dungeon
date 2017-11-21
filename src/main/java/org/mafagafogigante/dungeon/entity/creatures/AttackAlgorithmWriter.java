@@ -28,6 +28,10 @@ final class AttackAlgorithmWriter {
   static void writeInflictedDamage(Creature attacker, int hitDamage, Creature defender, boolean criticalHit) {
     DungeonString string = new DungeonString();
     string.setColor(attacker.getId().equals(Game.getGameState().getHero().getId()) ? Color.GREEN : Color.RED);
+    if (attacker.equals(Game.getGameState().getHero().getPet())) {
+      string.setColor(Color.GREEN);
+      string.append("(Your pet) ");
+    }
     string.append(attacker.getName().getSingular());
     string.append(" inflicted ");
     string.append(String.valueOf(hitDamage));

@@ -114,23 +114,7 @@ public final class Engine {
       return;
     }
     while (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
-      if (pet != null) {
-        if (pet.getHealth().isAlive()) {
-          pet.hit(foe);
-          Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
-        }
-        hero.hit(foe);
-        Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
-        if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
-          if (pet.getHealth().isAlive()) {
-            foe.hit(pet);
-            Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
-          } else {
-            foe.hit(hero);
-            Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
-          }
-        }
-      } else {
+      if (pet == null) {
         hero.hit(foe);
         Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
         // No contract specifies that calling hit on the Hero will not kill it, so check both creatures again.
@@ -138,6 +122,24 @@ public final class Engine {
         if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
           foe.hit(hero);
           Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+        }
+      } else {
+        if (pet.getHealth().isAlive()) {
+          pet.hit(foe);
+          Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+        }
+        if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
+          hero.hit(foe);
+          Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+          if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
+            if (pet.getHealth().isAlive()) {
+              foe.hit(pet);
+              Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+            } else {
+              foe.hit(hero);
+              Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
+            }
+          }
         }
       }
     }

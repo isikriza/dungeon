@@ -98,6 +98,10 @@ public class Hero extends Creature {
     this.pet = null;
   }
 
+  public Creature getPet() {
+    return pet;
+  }
+
   private static int nextRandomTimeChunk() {
     return Random.nextInteger(15 * 60 + 1);
   }
@@ -284,6 +288,8 @@ public class Hero extends Creature {
     Creature target = selectTarget(arguments);
     if (isReclaimableTarget(target)) {
       pet = target;
+      Writer.write("You tamed the target.");
+      Writer.write(target.getName().toString() + " is your pet now.");
     } else {
       attackTarget(arguments);
     }
@@ -295,7 +301,7 @@ public class Hero extends Creature {
   private boolean isReclaimableTarget(Creature target) {
     if (target != null) {
       int tame = (int) (1.0 / target.getAttack() * 100);
-      if (Random.nextInteger(100) <= tame) {
+      if (Random.nextInteger(1) <= tame) { //TODO: Test amacli boyle yazildi. Oran hesabi düzeltilecek.
         return true;
       }
     }
