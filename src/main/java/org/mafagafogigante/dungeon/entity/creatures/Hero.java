@@ -757,11 +757,13 @@ public class Hero extends Creature {
     int changeFactor = 5;
     int upgradeDamage = 10;
     boolean controlForBrokenWeapon = false;
-    if (arguments.length == 1 && hero.getWeapon() != null) {
-      String weaponNameString = "";
-      weaponNameString += getWeapon().getName();
-      if (!weaponNameString.equalsIgnoreCase(arguments[0])) {
+    if (arguments.length != 0 && hero.getWeapon() != null) {
+      if (!isEquipped(hero, arguments)) {
         Writer.write("You are not equipping this weapon.");
+        return;
+      }
+      if (hero.getWeapon().isBroken()) {
+        Writer.write("This weapon is broken. You can not improve it.");
         return;
       }
       int level = hero.getWeapon().getWeaponComponent().getLevel() + 1;
@@ -801,14 +803,29 @@ public class Hero extends Creature {
         Writer.write("Your weapon is level " + level + " now.");
       }
     } else {
-      if (arguments.length != 1) {
-        Writer.write("You should improve only one weapon at a time.");
-        Writer.write("Or if you trying to improve a broken weapon, you can not do it.");
-      } else {
-        Writer.write("You are not equipping any weapon.");
-      }
-
+      Writer.write("You are not equipping any weapon.");
     }
+  }
+
+  /**
+   * This method is for improveWeapon method.
+   * If the given weapon name that wanted to be improved is the same
+   * weapon with currently equipped weapon this method will returns true,
+   * otherwise returns false.
+   */
+  private boolean isEquipped(Hero hero, String[] arguments) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < arguments.length ; i++) {
+      sb.append(arguments[i]);
+      if (i != arguments.length - 1) {
+        sb.append(" ");
+      }
+    }
+    String weapon = "";
+    weapon += hero.getWeapon().getName();
+    String args = "";
+    args += sb.toString();
+    return args.equalsIgnoreCase(weapon);
   }
 
 
