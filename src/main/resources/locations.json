@@ -169,6 +169,14 @@
           "delay": 2
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 2
+        },
+        {
           "id": "HUGE_SPIDER",
           "population": {
             "minimum": 1,
@@ -180,6 +188,18 @@
       "items": [
         {
           "id": "SWORD",
+          "probability": 0.5
+        },
+        {
+          "id": "IRON",
+          "probability": 0.5
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.5
+        },
+        {
+          "id": "MITHRIL",
           "probability": 0.5
         },
         {
@@ -237,6 +257,14 @@
           "delay": 2
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 2
+        },
+        {
           "id": "HUGE_SPIDER",
           "population": {
             "minimum": 1,
@@ -256,6 +284,18 @@
         },
         {
           "id": "POTION_OF_THE_WARRIOR",
+          "probability": 0.25
+        },
+        {
+          "id": "IRON",
+          "probability": 0.25
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.25
+        },
+        {
+          "id": "MITHRIL",
           "probability": 0.25
         },
         {
@@ -493,6 +533,14 @@
           "delay": 20
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "FARMER",
           "population": {
             "minimum": 1,
@@ -557,6 +605,14 @@
           "delay": 4
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "ZOMBIE",
           "population": {
             "minimum": 1,
@@ -584,6 +640,18 @@
         },
         {
           "id": "SWORD",
+          "probability": 0.25
+        },
+        {
+          "id": "IRON",
+          "probability": 1
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.5
+        },
+        {
+          "id": "MITHRIL",
           "probability": 0.25
         },
         {
@@ -645,6 +713,14 @@
           "delay": 1
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "WHITE_TIGER",
           "population": {
             "minimum": 1,
@@ -664,6 +740,18 @@
         },
         {
           "id": "SWORD",
+          "probability": 0.15
+        },
+        {
+          "id": "IRON",
+          "probability": 0.5
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.25
+        },
+        {
+          "id": "MITHRIL",
           "probability": 0.15
         },
         {
@@ -741,6 +829,14 @@
           "delay": 6
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "MERCHANT",
           "population": {
             "minimum": 1,
@@ -752,6 +848,18 @@
       "items": [
         {
           "id": "AXE",
+          "probability": 0.05
+        },
+        {
+          "id": "IRON",
+          "probability": 0.05
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.05
+        },
+        {
+          "id": "MITHRIL",
           "probability": 0.05
         },
         {
@@ -805,6 +913,14 @@
           "delay": 6
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "ORC",
           "population": {
             "minimum": 1,
@@ -832,6 +948,18 @@
       "items": [
         {
           "id": "LONGSWORD",
+          "probability": 0.15
+        },
+        {
+          "id": "IRON",
+          "probability": 0.5
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.25
+        },
+        {
+          "id": "MITHRIL",
           "probability": 0.15
         },
         {
@@ -893,6 +1021,14 @@
           "delay": 24
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "TRAVELER",
           "population": {
             "minimum": 2,
@@ -905,6 +1041,18 @@
         {
           "id": "STONE",
           "probability": 0.8
+        },
+        {
+          "id": "IRON",
+          "probability": 0.5
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.25
+        },
+        {
+          "id": "MITHRIL",
+          "probability": 0.15
         }
       ]
     },
@@ -945,6 +1093,14 @@
           "delay": 2
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "GREEN_IGUANA",
           "population": {
             "minimum": 2,
@@ -968,6 +1124,18 @@
         {
           "id": "SPEAR",
           "probability": 0.3
+        },
+        {
+          "id": "IRON",
+          "probability": 0.3
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.15
+        },
+        {
+          "id": "MITHRIL",
+          "probability": 0.15
         }
       ]
     },
@@ -1016,6 +1184,14 @@
           "delay": 24
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "KOMODO_DRAGON",
           "population": {
             "minimum": 1,
@@ -1028,6 +1204,18 @@
         {
           "id": "AXE",
           "probability": 0.3
+        },
+        {
+          "id": "IRON",
+          "probability": 0.3
+        },
+        {
+          "id": "STEEL",
+          "probability": 0.15
+        },
+        {
+          "id": "MITHRIL",
+          "probability": 0.15
         }
       ]
     },
@@ -1060,6 +1248,14 @@
           "delay": 6
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "FROG",
           "population": {
             "minimum": 2,
@@ -1082,6 +1278,10 @@
       "items": [
         {
           "id": "CLUB",
+          "probability": 0.4
+        },
+        {
+          "id": "IRON",
           "probability": 0.4
         }
       ]
@@ -1131,6 +1331,14 @@
           "delay": 4
         },
         {
+          "id": "UNGOLIANT",
+          "population": {
+            "minimum": 1,
+            "maximum": 1
+          },
+          "delay": 4
+        },
+        {
           "id": "KOMODO_DRAGON",
           "population": {
             "minimum": 1,
@@ -1150,6 +1358,10 @@
       "items": [
         {
           "id": "STONE",
+          "probability": 0.3
+        },
+        {
+          "id": "STEEL",
           "probability": 0.3
         },
         {

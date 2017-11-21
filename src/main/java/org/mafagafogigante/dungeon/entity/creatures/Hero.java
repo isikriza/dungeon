@@ -754,10 +754,6 @@ public class Hero extends Creature {
      *Improves the currently equipped weapon.
      */
   public void improveWeapon(Hero hero, String[] arguments) {
-    String[]array = new String[1];
-    array[0] = "apple";
-    Item requested = hero.selectInventoryItem(array);
-    System.out.println(requested);
     int changeFactor = 5;
     int upgradeDamage = 10;
     boolean controlForBrokenWeapon = false;
@@ -770,9 +766,16 @@ public class Hero extends Creature {
         Writer.write("This weapon is broken. You can not improve it.");
         return;
       }
+      Item requested = requestedMaterial(hero);
+      if (requested != null) {
+        Writer.write("You used your " + requested.getName());
+        requested.decrementIntegrityByHit();
+      } else {
+        return;
+      }
       int level = hero.getWeapon().getWeaponComponent().getLevel() + 1;
       int randomNumber = (int) ((Math.random() * 100) + 1);
-      int luck = randomNumber - (level * 4);
+      int luck = randomNumber - (level * 2);
       if (luck < 0) {
         luck = 0;
       }
@@ -788,6 +791,9 @@ public class Hero extends Creature {
         hero.getWeapon().getWeaponComponent().setDamage(newDamage);
         Writer.write("You could not succeed to upgrade the weapon and you gave damage your weapon.");
         Writer.write("Your weapon loss " + changeFactor + " damage.");
+        if (newDamage < 0) {
+          newDamage = 0;
+        }
         Writer.write("Your weapon's new damage is: " + newDamage);
       } else if (luck >= 50 && luck < 85) {
         int newDamage = hero.getWeapon().getWeaponComponent().getDamage() + changeFactor;
@@ -830,6 +836,27 @@ public class Hero extends Creature {
     String args = "";
     args += sb.toString();
     return args.equalsIgnoreCase(weapon);
+  }
+
+  /**
+   * This method is for improveWeapon method.
+   * It specifies the requested material to improve the weapon.
+   */
+  private Item requestedMaterial(Hero hero) {
+    String[]array = new String[1];
+    int level = hero.getWeapon().getWeaponComponent().getLevel();
+    if (level >= 0 && level <= 2) {
+      array[0] = "Iron";
+    } else if (level >= 3 && level <= 5) {
+      array[0] = "Steel";
+    } else {
+      array[0] = "Mithril";
+    }
+    Item requested = hero.selectInventoryItem(array);
+    if (requested == null) {
+      Writer.write("You must have " + array[0] + " to improve this weapon.");
+    }
+    return requested;
   }
 
 

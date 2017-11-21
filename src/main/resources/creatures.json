@@ -12,8 +12,7 @@
       "inventoryItemLimit": 12,
       "inventoryWeightLimit": 10,
       "inventory": [
-        "POTATO",
-        "MITHRIL"
+        "POTATO"
       ],
       "visibility": "70%",
       "weight": 60.0,
@@ -40,7 +39,6 @@
         ["CHERRY", 0.8],
         ["WATERMELON", 0.2],
         ["TOME_OF_PERCEIVE", 0.1],
-        ["MITHRIL", 0.4],
         ["TOME_OF_REPAIR", 0.05]
       ],
       "visibility": "70%",
@@ -433,8 +431,7 @@
         "CORPSE"
       ],
       "drops": [
-        ["SPIDER_VENOM_GLAND", 0.2],
-        ["MITHRIL", 1]
+        ["SPIDER_VENOM_GLAND", 0.2]
       ],
       "visibility": "90%",
       "weight": 300.0,

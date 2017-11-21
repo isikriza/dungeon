@@ -1650,7 +1650,49 @@
       "luminosity": "90.00%",
       "damage": 10,
       "hitRate": "60.00%",
-      "integrityDecrementOnHit": 1
+      "integrityDecrementOnHit": 15
+    },
+    {
+      "id": "IRON",
+      "type": "Misc",
+      "name": {
+        "singular": "Iron"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON"
+      ],
+      "integrity": {
+        "current": 15,
+        "maximum": 15
+      },
+      "weight": 1,
+      "visibility": "90.00%",
+      "luminosity": "10.00%",
+      "damage": 10,
+      "hitRate": "10.00%",
+      "integrityDecrementOnHit": 15
+    },
+    {
+      "id": "STEEL",
+      "type": "Misc",
+      "name": {
+        "singular": "Steel"
+      },
+      "rarity": "COMMON",
+      "tags": [
+        "WEAPON"
+      ],
+      "integrity": {
+        "current": 15,
+        "maximum": 15
+      },
+      "weight": 0.5,
+      "visibility": "90.00%",
+      "luminosity": "30.00%",
+      "damage": 10,
+      "hitRate": "50.00%",
+      "integrityDecrementOnHit": 15
     },
     {
       "id": "HARPY_FEATHER",
