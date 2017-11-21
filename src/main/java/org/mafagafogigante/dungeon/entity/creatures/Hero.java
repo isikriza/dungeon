@@ -88,6 +88,7 @@ public class Hero extends Creature {
   private final Date dateOfBirth;
   private Creature pet;
   private boolean controlWriterMessages = false;
+  private String potType = "";
 
   Hero(CreaturePreset preset, Statistics statistics, Date dateOfBirth) {
     super(preset);
@@ -122,6 +123,14 @@ public class Hero extends Creature {
     getHealth().incrementBy(amount);
     statistics.getHeroStatistics().incrementHealingThroughEating(amount);
     if (getHealth().isFull()) {
+      Writer.write("You are completely healed.");
+    }
+  }
+
+  private void updateHealthStatistic(int oldHealth) {
+    int incrementOfHealth = getHealth().getCurrent() - oldHealth;
+    statistics.getHeroStatistics().incrementHealingThroughDrinking(incrementOfHealth);
+    if (getHealth().isFull() && incrementOfHealth != 0) {
       Writer.write("You are completely healed.");
     }
   }
@@ -178,6 +187,10 @@ public class Hero extends Creature {
           getHealth().incrementBy(healing);
         }
       }
+
+
+
+
       Writer.write("You wake up.");
     } else {
       Writer.write("You can only sleep at night.");
@@ -544,6 +557,7 @@ public class Hero extends Creature {
    * Attempts to drink an item.
    */
   public void drinkItem(String[] arguments) {
+    int oldHealth = getHealth().getCurrent();
     Item selectedItem = selectInventoryItem(arguments);
     if (selectedItem != null) {
       if (selectedItem.hasTag(Item.Tag.DRINKABLE)) {
@@ -552,6 +566,9 @@ public class Hero extends Creature {
           DrinkableComponent component = selectedItem.getDrinkableComponent();
           if (!component.isDepleted()) {
             component.affect(this);
+            if (component.getTypeOfDrink().contains("RED")) {
+              updateHealthStatistic(oldHealth);
+            }
             if (component.isDepleted()) {
               Writer.write("You drank the last dose of " + selectedItem.getName() + ".");
             } else {
@@ -568,6 +585,7 @@ public class Hero extends Creature {
         Writer.write("This item is not drinkable.");
       }
     }
+
   }
 
   /**

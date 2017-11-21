@@ -6,6 +6,7 @@ import org.mafagafogigante.dungeon.date.DungeonTimeUnit;
 import org.mafagafogigante.dungeon.date.Duration;
 import org.mafagafogigante.dungeon.game.Id;
 import org.mafagafogigante.dungeon.io.Version;
+import org.mafagafogigante.dungeon.io.Writer;
 import org.mafagafogigante.dungeon.util.Percentage;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class EffectFactory implements Serializable {
   private final Map<Id, EffectTemplate> templates = new HashMap<>();
 
   private EffectFactory() {
+    templates.put(new Id("PERCENT_OF_HEALING"), new PercentOfHealingEffectTemplate());
     templates.put(new Id("HEALING"), new HealingEffectTemplate());
     templates.put(new Id("EXTRA_ATTACK"), new AttackEffectTemplate());
     templates.put(new Id("FISHING_PROFICIENCY"), new FishingProficiencyTemplate());
@@ -56,6 +58,17 @@ public class EffectFactory implements Serializable {
       assertParameterCount(parameters, 1);
       final int healing = Integer.parseInt(parameters.get(0));
       return new HealingEffect(healing);
+    }
+  }
+
+  private static class PercentOfHealingEffectTemplate extends EffectTemplate {
+    private static final long serialVersionUID = Version.MAJOR;
+
+    @Override
+    public Effect instantiate(List<String> parameters) {
+      assertParameterCount(parameters, 1);
+      final int healing = Integer.parseInt(parameters.get(0));
+      return new PercentOfHealingEffect(healing);
     }
   }
 
@@ -107,6 +120,25 @@ public class EffectFactory implements Serializable {
     @Override
     public void affect(Creature creature) {
       creature.getHealth().incrementBy(healing);
+    }
+  }
+
+  private static class PercentOfHealingEffect extends Effect {
+    private static final long serialVersionUID = Version.MAJOR;
+    private final int healing;
+
+    PercentOfHealingEffect(int healing) {
+      this.healing = healing;
+    }
+
+    @Override
+    public void affect(Creature creature) {
+      //creature.getHealth().incrementBy(healing);
+      int currentHealth = creature.getHealth().getCurrent();
+      int addingHealth = (currentHealth * healing) / 100;
+      creature.getHealth().incrementBy(addingHealth);
+
+
     }
   }
 

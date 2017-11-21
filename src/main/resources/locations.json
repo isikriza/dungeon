@@ -186,6 +186,7 @@
         }
       ],
       "items": [
+
         {
           "id": "SWORD",
           "probability": 0.5
@@ -623,6 +624,22 @@
       ],
       "items": [
         {
+          "id": "BIG_RED_POT",
+          "probability": 0.8
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
+        {
           "id": "DAGGER",
           "probability": 0.15
         },
@@ -730,6 +747,22 @@
         }
       ],
       "items": [
+        {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
         {
           "id": "AXE",
           "probability": 0.2
@@ -847,6 +880,22 @@
       ],
       "items": [
         {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
+        {
           "id": "AXE",
           "probability": 0.05
         },
@@ -947,6 +996,22 @@
       ],
       "items": [
         {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
+        {
           "id": "LONGSWORD",
           "probability": 0.15
         },
@@ -1039,6 +1104,22 @@
       ],
       "items": [
         {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
+        {
           "id": "STONE",
           "probability": 0.8
         },
@@ -1122,6 +1203,22 @@
       ],
       "items": [
         {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
+        {
           "id": "SPEAR",
           "probability": 0.3
         },
@@ -1202,6 +1299,22 @@
       ],
       "items": [
         {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
+        {
           "id": "AXE",
           "probability": 0.3
         },
@@ -1276,6 +1389,22 @@
         "FISHABLE"
       ],
       "items": [
+        {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
         {
           "id": "CLUB",
           "probability": 0.4
@@ -1356,6 +1485,22 @@
         }
       ],
       "items": [
+        {
+          "id": "BIG_RED_POT",
+          "probability": 0.5
+        },
+        {
+          "id": "MEDIUM_RED_POT",
+          "probability": 0.7
+        },
+        {
+          "id": "GREEN_POT",
+          "probability": 0.6
+        },
+        {
+          "id": "BLUE_POT",
+          "probability": 0.5
+        },
         {
           "id": "STONE",
           "probability": 0.3

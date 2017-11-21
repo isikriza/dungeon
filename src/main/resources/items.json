@@ -260,7 +260,7 @@
       "drinkableDoses": 2,
       "drinkableEffects": [
         [
-          "HEALING",
+          "PERCENT_OF_HEALING",
           50
         ]
       ],
@@ -290,7 +290,7 @@
       "drinkableDoses": 2,
       "drinkableEffects": [
         [
-          "HEALING",
+          "PERCENT_OF_HEALING",
           25
         ]
       ],

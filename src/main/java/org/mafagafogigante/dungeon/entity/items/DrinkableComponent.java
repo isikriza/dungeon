@@ -15,12 +15,15 @@ public class DrinkableComponent implements Serializable {
   private final List<Effect> effects;
   private final int integrityDecrementPerDose;
   private int doses;
+  private String typeOfDrink;
 
-  DrinkableComponent(List<Effect> effects, int integrityDecrementPerDose, int doses) {
+  DrinkableComponent(List<Effect> effects, int integrityDecrementPerDose, int doses, String typeOfDrink) {
     this.effects = effects;
     this.integrityDecrementPerDose = integrityDecrementPerDose;
     this.doses = doses;
+    this.typeOfDrink = typeOfDrink;
   }
+
 
   /**
    * Affect a creature with a dose. This automatically decrements the number of remaining doses.
@@ -37,6 +40,10 @@ public class DrinkableComponent implements Serializable {
 
   public boolean isDepleted() {
     return doses == 0;
+  }
+
+  public String getTypeOfDrink() {
+    return typeOfDrink;
   }
 
   int getIntegrityDecrementPerDose() {
