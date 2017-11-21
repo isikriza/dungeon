@@ -1632,26 +1632,24 @@
       "integrityDecrementOnHit": 2
     },
     {
-      "id": "IRON",
+      "id": "MITHRIL",
       "type": "Misc",
       "name": {
-        "singular": "Iron"
+        "singular": "Mithril"
       },
       "rarity": "COMMON",
       "tags": [
-        "WEAPON",
-        "DECOMPOSES"
+        "WEAPON"
       ],
       "integrity": {
         "current": 15,
         "maximum": 15
       },
-      "weight": 0.9,
+      "weight": 0.2,
       "visibility": "90.00%",
-      "luminosity": "10.00%",
-      "decompositionPeriod": "10 days",
-      "damage": 6,
-      "hitRate": "50.00%",
+      "luminosity": "90.00%",
+      "damage": 10,
+      "hitRate": "60.00%",
       "integrityDecrementOnHit": 1
     },
     {

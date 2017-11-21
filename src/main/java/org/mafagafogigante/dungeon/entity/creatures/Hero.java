@@ -754,6 +754,10 @@ public class Hero extends Creature {
      *Improves the currently equipped weapon.
      */
   public void improveWeapon(Hero hero, String[] arguments) {
+    String[]array = new String[1];
+    array[0] = "apple";
+    Item requested = hero.selectInventoryItem(array);
+    System.out.println(requested);
     int changeFactor = 5;
     int upgradeDamage = 10;
     boolean controlForBrokenWeapon = false;
