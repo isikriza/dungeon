@@ -712,6 +712,7 @@ public class Hero extends Creature {
           Writer.write(string);
           if (book.isDidactic()) {
             learnSpell(book);
+            this.getInventory().removeItem(selectedItem);
           }
         } else {
           HeroUtils.writeNoLongerInInventoryMessage(selectedItem);
@@ -733,10 +734,10 @@ public class Hero extends Creature {
     }
     Spell spell = SpellData.getSpellMap().get(book.getSpellId());
     if (getSpellcaster().knowsSpell(spell)) {
-      Writer.write("You already knew " + spell.getName().getSingular() + ".");
+      Writer.write("You already knew 3. level of" + spell.getName().getSingular() + ".");
     } else {
       getSpellcaster().learnSpell(spell);
-      Writer.write("You learned " + spell.getName().getSingular() + ".");
+
     }
   }
 

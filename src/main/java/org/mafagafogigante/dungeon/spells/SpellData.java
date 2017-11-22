@@ -29,23 +29,22 @@ public final class SpellData {
     putSpell(new Spell("HEAL", "Heal") {
       private static final int HEALING_VALUE = 10;
       private static final int SECONDS_TO_CAST_HEAL = 25;
-
       @Override
       public void operate(Hero hero, String[] targetMatcher) {
         if (targetMatcher.length == 0) {
-          Engine.rollDateAndRefresh(SECONDS_TO_CAST_HEAL);
-          hero.getHealth().incrementBy(HEALING_VALUE);
+          Engine.rollDateAndRefresh(SECONDS_TO_CAST_HEAL / this.getLevel());
+          hero.getHealth().incrementBy(HEALING_VALUE * this.getLevel());
           writeHealCastOnSelf(hero);
         } else {
           Creature target = hero.findCreature(targetMatcher);
           if (target != null) {
-            Engine.rollDateAndRefresh(SECONDS_TO_CAST_HEAL);
+            Engine.rollDateAndRefresh(SECONDS_TO_CAST_HEAL / this.getLevel());
             if (hero == target) { // The player used cast ... on <character name>.
               writeHealCastOnSelf(hero);
             } else {
               writeHealCastOnTarget(target);
             }
-            target.getHealth().incrementBy(HEALING_VALUE);
+            target.getHealth().incrementBy(HEALING_VALUE * this.getLevel());
           }
         }
       }
@@ -65,7 +64,7 @@ public final class SpellData {
       }
     });
     putSpell(new Spell("REPAIR", "Repair") {
-      private static final int REPAIR_VALUE = 50;
+      private static final int REPAIR_VALUE = 30;
       private static final int SECONDS_TO_CAST_REPAIR = 10;
 
       @Override
@@ -89,12 +88,12 @@ public final class SpellData {
         if (!item.hasTag(Item.Tag.REPAIRABLE)) {
           Writer.write(item.getName().getSingular() + " is not repairable.");
         } else {
-          Engine.rollDateAndRefresh(SECONDS_TO_CAST_REPAIR); // Time passes before casting.
+          Engine.rollDateAndRefresh(SECONDS_TO_CAST_REPAIR / this.getLevel()); // Time passes before casting.
           if (!hero.getInventory().hasItem(item)) { // If the item disappeared.
             Writer.write(item.getName().getSingular() + " disappeared before you finished casting.");
           } else {
             boolean wasCompletelyRepaired = item.getIntegrity().isPerfect();
-            item.getIntegrity().incrementBy(REPAIR_VALUE);
+            item.getIntegrity().incrementBy(REPAIR_VALUE * this.getLevel());
             Writer.write("You casted " + getName() + " on " + item.getName().getSingular() + ".");
             if (wasCompletelyRepaired) {
               Writer.write(item.getName().getSingular() + " was already completely repaired.");
@@ -112,7 +111,7 @@ public final class SpellData {
 
       @Override
       public void operate(Hero hero, String[] targetMatcher) {
-        Engine.rollDateAndRefresh(SECONDS_TO_CAST_PERCEIVE);
+        Engine.rollDateAndRefresh(SECONDS_TO_CAST_PERCEIVE / this.getLevel());
         List<Creature> creatureList = new ArrayList<>(hero.getLocation().getCreatures());
         creatureList.remove(hero);
         DungeonString string = new DungeonString();
@@ -132,7 +131,7 @@ public final class SpellData {
         } else {
           Creature target = hero.findCreature(targetMatcher);
           if (target != null) {
-            Engine.rollDateAndRefresh(SECONDS_TO_CAST_FINGER_OF_DEATH);
+            Engine.rollDateAndRefresh(SECONDS_TO_CAST_FINGER_OF_DEATH / this.getLevel());
             DungeonString string = new DungeonString();
             string.append("You casted ");
             string.append(getName().getSingular());
@@ -161,7 +160,7 @@ public final class SpellData {
         } else {
           Creature target = hero.findCreature(targetMatcher);
           if (target != null) {
-            Engine.rollDateAndRefresh(SECONDS_TO_CAST_VEIL_OF_DARKNESS);
+            Engine.rollDateAndRefresh(SECONDS_TO_CAST_VEIL_OF_DARKNESS / this.getLevel());
             target.getLightSource().disable();
             Writer.write("You casted " + getName() + " on " + target.getName().getSingular() + ".");
           }
@@ -179,7 +178,7 @@ public final class SpellData {
         } else {
           Creature target = hero.findCreature(targetMatcher);
           if (target != null) {
-            Engine.rollDateAndRefresh(SECONDS_TO_CAST_UNVEIL);
+            Engine.rollDateAndRefresh(SECONDS_TO_CAST_UNVEIL / this.getLevel());
             target.getLightSource().enable();
             Writer.write("You casted " + getName() + " on " + target.getName().getSingular() + ".");
           }
@@ -198,8 +197,8 @@ public final class SpellData {
         } else {
           Creature target = hero.findCreature(targetMatcher);
           if (target != null) {
-            Engine.rollDateAndRefresh(SECONDS_TO_CAST_DISPLACE);
-            if (Random.roll(DISPLACE_PROBABILITY)) {
+            Engine.rollDateAndRefresh(SECONDS_TO_CAST_DISPLACE / this.getLevel());
+            if (Random.roll(DISPLACE_PROBABILITY * this.getLevel())) {
               Location targetLocation = target.getLocation();
               BlockedEntrances blockedEntrances = targetLocation.getBlockedEntrances();
               List<Direction> unblockedDirections = new ArrayList<>();

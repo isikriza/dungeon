@@ -18,10 +18,12 @@ final class SpellDefinition implements Serializable {
   public final Id id;
   // Use a name because in the future we may want to write stuff like "you casted 10 fireballs so far."
   public final Name name;
+  public int level;
 
   SpellDefinition(String id, String name) {
     this.id = new Id(id);
     this.name = NameFactory.newInstance(name);
+    this.level = 0;
   }
 
   @Override

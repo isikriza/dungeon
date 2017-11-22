@@ -31,6 +31,15 @@ public abstract class Spell implements Selectable, Serializable {
     return definition.name; // Delegate to SpellDefinition.
   }
 
+  public void setLevel(int level) {
+    definition.level = level;
+  }
+
+  public int getLevel() {
+    return definition.level;
+  }
+
+
   @Override
   public boolean equals(Object object) {
     if (this == object) {
@@ -50,7 +59,6 @@ public abstract class Spell implements Selectable, Serializable {
 
   @Override
   public String toString() {
-    return getName().getSingular();
+    return getName().getSingular() + " level " + this.getLevel();
   }
-
 }

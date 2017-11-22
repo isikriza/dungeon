@@ -32,7 +32,15 @@ public class HeroSpellcaster implements Serializable, Spellcaster {
 
   @Override
   public boolean knowsSpell(Spell spell) {
-    return spellList.contains(spell);
+    if (!spellList.contains(spell)) {
+      return false;
+    } else {
+      if (spell.getLevel() == 3) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   @Override
@@ -41,9 +49,17 @@ public class HeroSpellcaster implements Serializable, Spellcaster {
       DungeonLogger.warning("called learnSpell with " + spell.getName() + " which is already known.");
     } else {
       DungeonLogger.info("Learned " + spell.getName() + ".");
-      spellList.add(spell);
+      int random = (int) (Math.random() * 99 + 1);
+      if (random <= 90 - (spell.getLevel() * 10) ) {
+        spell.setLevel(spell.getLevel() + 1);
+        spellList.add(spell);
+        Writer.write("You learned " + spell.getLevel() + ". level " + spell.getName().getSingular() + ".");
+      } else {
+        Writer.write("You did no learned " + spell.getName().getSingular() + ".");
+      }
     }
   }
+
 
   @Override
   public void parseCast(String[] arguments) {
