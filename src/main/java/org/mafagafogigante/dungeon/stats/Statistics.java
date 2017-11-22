@@ -82,6 +82,7 @@ public final class Statistics implements Serializable {
     statistics.insertRow("Healing through eating", String.valueOf(heroStatistics.getHealingThroughEating()));
     statistics.insertRow("Sleeping time", new Date(heroStatistics.getSleepingTime()).toTimeString());
     statistics.insertRow("Resting time", new Date(heroStatistics.getRestingTime()).toTimeString());
+    statistics.insertRow("Healing through drinking", String.valueOf(heroStatistics.getHealingThroughDrinking()));
   }
 
   private void insertCommandStatistics(Table statistics) {

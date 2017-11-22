@@ -34,9 +34,15 @@ public class Creature extends Entity {
   private final CreatureHealth health;
   private final Dropper dropper;
   private final Observer observer = new Observer(this);
+  private  int defendRate;
+  private int extraAttackRate;
   BattleLog battleLog = DummyBattleLog.getInstance();
   private Item weapon;
   private Location location;
+  public boolean green;
+  public boolean blue;
+
+
 
   /**
    * What caused the death of this creature. If getHealth().isAlive() evaluates to true, this should be null.
@@ -57,6 +63,10 @@ public class Creature extends Entity {
     conditions = new ArrayList<>();
     lightSource = new LightSource(preset.getLuminosity());
     dropper = new Dropper(this, preset.getDropList());
+    defendRate = 0;
+    extraAttackRate = 0;
+    green = false;
+    blue = false;
   }
 
   public boolean hasTag(Tag tag) {
@@ -129,6 +139,27 @@ public class Creature extends Entity {
     for (Condition condition : getConditions()) {
       total = condition.modifyAttack(total);
     }
+    return total;
+  }
+
+  int getExtraAttackRate() {
+    int total = extraAttackRate;
+    for (Condition condition : getConditions()) {
+      total = condition.myModifyAttack(total);
+    }
+    return total;
+  }
+
+  int getDefendRate() {
+    int total = defendRate;
+    for (Condition condition : getConditions()) {
+      total = condition.modifyDefend(total);
+    }
+    return total;
+  }
+
+  int getExtraAttack() {
+    int total = attack + ((attack * getExtraAttackRate()) / 100);
     return total;
   }
 

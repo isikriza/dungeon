@@ -16,6 +16,7 @@ abstract class Condition implements Serializable {
 
   abstract String getDescription();
 
+
   @Override
   public boolean equals(Object object) {
     if (this == object) {
@@ -40,6 +41,14 @@ abstract class Condition implements Serializable {
     return currentAttack;
   }
 
+  int myModifyAttack(int currentAttack) {
+    return currentAttack;
+  }
+
+  int modifyDefend(int currentDefend) {
+    return currentDefend;
+  }
+
   Percentage modifyHitRate(Percentage hitRate) {
     return hitRate;
   }
@@ -47,5 +56,7 @@ abstract class Condition implements Serializable {
   Percentage modifyFishingProficiency(Percentage proficiency) {
     return proficiency;
   }
+
+
 
 }

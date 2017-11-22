@@ -31,10 +31,6 @@ public final class HeroStatistics implements Serializable {
     healingThroughDrinking += healing;
   }
 
-  public void incrementDamageThroughDrinking(long perc) {
-    totalDamage += totalDamage * (perc / 100);
-  }
-
   public void incrementDamageInflicted(long damage) {
     damageInflicted += damage;
   }
@@ -69,6 +65,10 @@ public final class HeroStatistics implements Serializable {
 
   long getRestingTime() {
     return restingTime;
+  }
+
+  long getHealingThroughDrinking() {
+    return healingThroughDrinking;
   }
 
 }

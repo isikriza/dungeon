@@ -566,14 +566,31 @@ public class Hero extends Creature {
     int oldHealth = getHealth().getCurrent();
     Item selectedItem = selectInventoryItem(arguments);
     if (selectedItem != null) {
+      //System.out.println(selectedItem.getName());
       if (selectedItem.hasTag(Item.Tag.DRINKABLE)) {
         Engine.rollDateAndRefresh(SECONDS_TO_DRINK_AN_ITEM);
         if (getInventory().hasItem(selectedItem)) {
           DrinkableComponent component = selectedItem.getDrinkableComponent();
           if (!component.isDepleted()) {
+            //System.out.println(component.getTypeOfDrink());
             component.affect(this);
-            if (component.getTypeOfDrink().contains("RED")) {
-              updateHealthStatistic(oldHealth);
+            if (selectedItem.getName().toString().indexOf("Green") >= 0) {
+              if (hasWeapon()) {
+                Writer.write("Your damage is now :" + getTotalDamageIncludeGreenPot());
+              } else {
+                Writer.write("Your damage is now :" + getExtraAttack());
+              }
+
+            }
+            if (selectedItem.getName().toString().indexOf("Red") >= 0) {
+              if (getHealth().isFull()) {
+                Writer.write("You are completely healed.");
+              } else {
+                int dist = getHealth().getCurrent() - oldHealth;
+                Writer.write("+" + dist + " Healed");
+                updateHealthStatistic(oldHealth);
+              }
+
             }
             if (component.isDepleted()) {
               Writer.write("You drank the last dose of " + selectedItem.getName() + ".");
@@ -917,7 +934,13 @@ public class Hero extends Creature {
     string.append(getHealth().getHealthState().toString().toLowerCase(Locale.ENGLISH));
     string.append(".\n");
     string.append("Your base attack is ");
-    string.append(String.valueOf(getAttack()));
+    if (!hasWeapon() && getExtraAttackRate() > 0) {
+      string.append(String.valueOf(getExtraAttack()));
+    } else {
+      string.append(String.valueOf(getAttack()));
+
+    }
+
     string.append(".\n");
     if (hasWeapon()) {
       string.append("You are currently equipping ");
@@ -927,14 +950,26 @@ public class Hero extends Creature {
       string.append(". This makes your total damage ");
       string.append(String.valueOf(getTotalDamage()));
       string.append(".\n");
+      if (getExtraAttackRate() > 0) {
+        string.append(" Green pot : active \n ");
+        string.append(" This give extra attack : + ");
+        string.append(String.valueOf(getTotalDamageIncludeGreenPot() - getTotalDamage()));
+        string.append(".\n");
+
+      }
     } else {
-      string.append("You are fighting bare-handed.\n");
+      string.append(" You are fighting bare-handed.\n");
     }
     Writer.write(string);
   }
 
   private int getTotalDamage() {
-    return getAttack() + getWeapon().getWeaponComponent().getDamage();
+    return getWeapon().getWeaponComponent().getDamage() + getAttack();
+  }
+
+  private int getTotalDamageIncludeGreenPot() {
+    int totalDamage = getAttack() + getWeapon().getWeaponComponent().getDamage();
+    return totalDamage + ((totalDamage * getExtraAttackRate()) / 100);
   }
 
   /**

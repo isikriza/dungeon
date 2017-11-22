@@ -26,6 +26,12 @@ final class AttackAlgorithmWriter {
    * @param criticalHit a boolean indicating if the attack was a critical hit or not
    */
   static void writeInflictedDamage(Creature attacker, int hitDamage, Creature defender, boolean criticalHit) {
+    if (defender.getDefendRate() > 0) {
+      hitDamage = hitDamage - ((hitDamage * defender.getDefendRate()) / 100);
+    }
+    if (attacker.getDefendRate() > 0 || attacker.getExtraAttackRate() > 0) {
+      hitDamage = hitDamage + ((hitDamage * attacker.getExtraAttackRate()) / 100);
+    }
     DungeonString string = new DungeonString();
     string.setColor(attacker.getId().equals(Game.getGameState().getHero().getId()) ? Color.GREEN : Color.RED);
     if (attacker.equals(Game.getGameState().getHero().getPet())) {

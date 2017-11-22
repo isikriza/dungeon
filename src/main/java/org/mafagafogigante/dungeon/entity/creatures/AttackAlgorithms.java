@@ -26,6 +26,7 @@ final class AttackAlgorithms {
     if (uninitialized) {
       initialize();
     }
+
     ATTACK_ALGORITHM_MAP.get(attacker.getAttackAlgorithmId()).renderAttack(attacker, defender);
   }
 

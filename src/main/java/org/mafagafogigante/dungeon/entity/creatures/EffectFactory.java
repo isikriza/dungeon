@@ -21,6 +21,8 @@ public class EffectFactory implements Serializable {
   private final Map<Id, EffectTemplate> templates = new HashMap<>();
 
   private EffectFactory() {
+    templates.put(new Id("PERCENT_OF_DEFEND_RATE"), new PercentOfDefendEffectTemplate());
+    templates.put(new Id("PERCENT_OF_EXTRA_ATTACK"), new PercentOfAttackEffectTemplate());
     templates.put(new Id("PERCENT_OF_HEALING"), new PercentOfHealingEffectTemplate());
     templates.put(new Id("HEALING"), new HealingEffectTemplate());
     templates.put(new Id("EXTRA_ATTACK"), new AttackEffectTemplate());
@@ -82,6 +84,32 @@ public class EffectFactory implements Serializable {
       // Period parsing already throws only IllegalArgumentException and derived exceptions.
       final Duration duration = DungeonTimeParser.parseDuration(parameters.get(1));
       return new AttackEffect(duration, extraDamage);
+    }
+  }
+
+  private static class PercentOfDefendEffectTemplate extends EffectTemplate {
+    private static final long serialVersionUID = Version.MAJOR;
+
+    @Override
+    public Effect instantiate(List<String> parameters) {
+      assertParameterCount(parameters, 2);
+      final int defendRate = Integer.parseInt(parameters.get(0));
+      // Period parsing already throws only IllegalArgumentException and derived exceptions.
+      final Duration duration = DungeonTimeParser.parseDuration(parameters.get(1));
+      return new PercentOfDefendEffect(duration, defendRate);
+    }
+  }
+
+  private static class PercentOfAttackEffectTemplate extends EffectTemplate {
+    private static final long serialVersionUID = Version.MAJOR;
+
+    @Override
+    public Effect instantiate(List<String> parameters) {
+      assertParameterCount(parameters, 2);
+      final int extraDamage = Integer.parseInt(parameters.get(0));
+      // Period parsing already throws only IllegalArgumentException and derived exceptions.
+      final Duration duration = DungeonTimeParser.parseDuration(parameters.get(1));
+      return new PercentOfAttackEffect(duration, extraDamage );
     }
   }
 
@@ -188,6 +216,111 @@ public class EffectFactory implements Serializable {
       @Override
       int modifyAttack(int currentAttack) {
         return currentAttack + attackModifier;
+      }
+    }
+  }
+
+  private static class PercentOfDefendEffect extends Effect {
+    private static final long serialVersionUID = Version.MAJOR;
+    private final Duration duration;
+    private final int defend;
+
+    PercentOfDefendEffect(Duration duration, int defend) {
+      this.duration = duration;
+      this.defend = defend;
+    }
+
+    @Override
+    public void affect(final Creature creature) {
+      Date start = creature.getLocation().getWorld().getWorldDate();
+      final Date end = start.plus(duration.getSeconds(), DungeonTimeUnit.SECOND);
+      creature.addCondition(new DefendCondition(this, end, defend, creature));
+
+    }
+
+    private static class DefendCondition extends Condition {
+      private static final long serialVersionUID = Version.MAJOR;
+      private final Date end;
+      private final Effect effect;
+      private final int defendModifier;
+      private final Creature creature;
+
+      DefendCondition(Effect effect, Date end, int defendModifier, Creature creature) {
+        this.effect = effect;
+        this.end = end;
+        this.defendModifier = defendModifier;
+        this.creature = creature;
+      }
+
+      @Override
+      Date getExpirationDate() {
+        return end;
+      }
+
+      public Effect getEffect() {
+        return effect;
+      }
+
+      @Override
+      String getDescription() {
+        return "+" + defendModifier + " to defend";
+      }
+
+      @Override
+      int modifyDefend(int currentDefend) {
+        return currentDefend + defendModifier;
+      }
+    }
+  }
+
+  private static class PercentOfAttackEffect extends Effect {
+    private static final long serialVersionUID = Version.MAJOR;
+    private final Duration duration;
+    private int extraDamage;
+
+    PercentOfAttackEffect(Duration duration, int extraDamage) {
+      this.duration = duration;
+      this.extraDamage = extraDamage;
+    }
+
+    @Override
+    public void affect(final Creature creature) {
+      Date start = creature.getLocation().getWorld().getWorldDate();
+      final Date end = start.plus(duration.getSeconds(), DungeonTimeUnit.SECOND);
+      creature.addCondition(new PercentOfAttackCondition(this, end, extraDamage));
+    }
+
+    private static class PercentOfAttackCondition extends Condition {
+      private static final long serialVersionUID = Version.MAJOR;
+      private final Date end;
+      private final Effect effect;
+      private final int attackModifier;
+
+
+      PercentOfAttackCondition(Effect effect, Date end, int attackModifier) {
+        this.effect = effect;
+        this.end = end;
+        this.attackModifier = attackModifier;
+
+      }
+
+      @Override
+      Date getExpirationDate() {
+        return end;
+      }
+
+      public Effect getEffect() {
+        return effect;
+      }
+
+      @Override
+      String getDescription() {
+        return "+" + attackModifier + " to attack";
+      }
+
+      @Override
+      int myModifyAttack(int currentAttackRate) {
+        return currentAttackRate + attackModifier;
       }
     }
   }
