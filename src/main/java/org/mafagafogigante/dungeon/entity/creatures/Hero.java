@@ -69,6 +69,7 @@ public class Hero extends Creature {
   private static final int SECONDS_TO_DROP_AN_ITEM = 2;
   private static final int SECONDS_TO_UNEQUIP = 4;
   private static final int SECONDS_TO_EQUIP = 6;
+  private static final int SECONDS_TO_IMPROVE = 50;
   private static final int SECONDS_TO_FISH = 60;
   private static final int SECONDS_TO_MILK_A_CREATURE = 45;
   private static final int SECONDS_TO_READ_EQUIPPED_CLOCK = 4;
@@ -676,10 +677,12 @@ public class Hero extends Creature {
       text.append(String.valueOf(selectedItem.getWeaponComponent().getDamage()));
       text.append(".");
       text.append("\n");
-      text.append("The level of this item is ");
-      text.append(String.valueOf(selectedItem.getWeaponComponent().getLevel()));
-      text.append(".");
-      text.append("\n");
+      if (selectedItem.getType().equalsIgnoreCase("Weapon")) {
+        text.append("The level of this item is ");
+        text.append(String.valueOf(selectedItem.getWeaponComponent().getLevel()));
+        text.append(".");
+        text.append("\n");
+      }
       text.append("The base hit rate of this item is ");
       text.append(String.valueOf(selectedItem.getWeaponComponent().getHitRate()));
       text.append(".");
@@ -829,12 +832,13 @@ public class Hero extends Creature {
         Writer.write("You could not succeed to upgrade the weapon and you broke it.");
       } else if (luck >= 15 && luck < 50) {
         int newDamage = hero.getWeapon().getWeaponComponent().getDamage() - changeFactor;
-        hero.getWeapon().getWeaponComponent().setDamage(newDamage);
-        Writer.write("You could not succeed to upgrade the weapon and you gave damage your weapon.");
-        Writer.write("Your weapon loss " + changeFactor + " damage.");
         if (newDamage < 0) {
           newDamage = 0;
         }
+        hero.getWeapon().getWeaponComponent().setDamage(newDamage);
+        Writer.write("You could not succeed to upgrade the weapon and you gave damage your weapon.");
+        Writer.write("Your weapon loss " + changeFactor + " damage.");
+
         Writer.write("Your weapon's new damage is: " + newDamage);
       } else if (luck >= 50 && luck < 85) {
         int newDamage = hero.getWeapon().getWeaponComponent().getDamage() + changeFactor;
@@ -849,6 +853,7 @@ public class Hero extends Creature {
         Writer.write("Your weapon gain " + upgradeDamage + " damage.");
         Writer.write("Your weapon's new damage is: " + newDamage);
       }
+      Engine.rollDateAndRefresh(SECONDS_TO_IMPROVE);
       if (!controlForBrokenWeapon) {
         hero.getWeapon().getWeaponComponent().setLevel(level);
         Writer.write("Your weapon is level " + level + " now.");

@@ -37,12 +37,10 @@ public final class Item extends Entity {
   private BookComponent bookComponent;
   /* The Inventory this Item is in. Should be null whenever this Item is not in an Inventory. */
   private BaseInventory inventory;
-  private int level = 0; //ycb
 
   /**
    * Constructs a new Item from the provided preset and with the specified creation date.
    */
-  //ycb
   public Item(ItemPreset preset, Date date, EnchantmentFactory enchantmentFactory) {
     super(preset);
     rarity = preset.getRarity();
@@ -53,6 +51,7 @@ public final class Item extends Entity {
     lightSource = new LightSource(preset.getLuminosity());
     if (hasTag(Tag.WEAPON)) {
       int damage = preset.getDamage();
+      int level = 0;
       Percentage hitRate = preset.getHitRate();
       int integrityDecrementOnHit = preset.getIntegrityDecrementOnHit();
       weaponComponent = new WeaponComponent(damage, hitRate, integrityDecrementOnHit, level);
