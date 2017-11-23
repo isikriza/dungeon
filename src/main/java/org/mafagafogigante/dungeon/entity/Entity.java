@@ -21,6 +21,7 @@ public abstract class Entity implements Selectable, Serializable {
   private final String type;
   private final Name name;
   private final Weight weight;
+  private final int petibility;
   private final VisibilityCriteria visibilityCriteria;
 
   protected Entity(Preset preset) {
@@ -28,6 +29,7 @@ public abstract class Entity implements Selectable, Serializable {
     this.type = preset.getType();
     this.name = preset.getName();
     this.weight = preset.getWeight();
+    this.petibility = preset.getPetibility();
     Luminosity minimumLuminosity = new Luminosity(new Percentage(1 - preset.getVisibility().toDouble()));
     this.visibilityCriteria = new VisibilityCriteria(new LuminosityVisibilityCriterion(minimumLuminosity));
   }
@@ -47,6 +49,10 @@ public abstract class Entity implements Selectable, Serializable {
 
   protected Weight getWeight() {
     return weight;
+  }
+
+  public int getPetibility() {
+    return petibility;
   }
 
   public VisibilityCriteria getVisibilityCriteria() {

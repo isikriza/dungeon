@@ -296,24 +296,37 @@ public class Hero extends Creature {
     Creature target = selectTarget(arguments);
     if (target != null) {
       if (isReclaimableTarget(target)) {
-        setPet(target);
-        Writer.write("You tamed the target.");
-        Writer.write(target.getName().toString() + " is your pet now.");
+        if (reclaimableTargetLuck(target)) {
+          setPet(target);
+          Writer.write("You tamed the target.");
+          Writer.write(target.getName().toString() + " is your pet now.");
+        } else {
+          Writer.write("You failed to tame the target.");
+          Writer.write("The target has attacked you.");
+          Engine.battle(this, target);
+        }
       } else {
-        Writer.write("You failed to tame the target.");
-        Writer.write("The target has attacked you.");
-        Engine.battle(this, target);
+        Writer.write("This target is not reclaimable.");
       }
     }
   }
 
   /**
-   * Currently running at target's attack dmg probability.
+   * Running at target's 'petibility'.
    */
   private boolean isReclaimableTarget(Creature target) {
     if (target != null) {
-      int tame = (int) (1.0 / target.getAttack() * 100);
-      if (Random.nextInteger(1) <= tame) { //TODO: Test amacli boyle yazildi. Oran hesabi düzeltilecek.
+      if (target.getPetibility() > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean reclaimableTargetLuck(Creature target) {
+    if (target != null) {
+      int random = Random.nextInteger(100);
+      if (random <= target.getPetibility()) {
         return true;
       }
     }
@@ -968,7 +981,6 @@ public class Hero extends Creature {
     if (hasPet()) {
       string.append("\n");
       string.append("You have a pet.\n");
-      string.append("Type: " + getPet().getType() + ".\n");
       string.append("Name: " + getPet().getName().getSingular() + ".\n");
       string.append("Health: " + getPet().getHealth().getCurrent() + " (" +
               getPet().getHealth().getHealthState().toString() + ").\n");

@@ -134,6 +134,7 @@ public class JsonCreaturePresetFactory implements CreaturePresetFactory {
       preset.setWeight(Weight.newInstance(presetObject.get("weight").asDouble()));
       preset.setHealth(presetObject.get("health").asInt());
       preset.setAttack(presetObject.get("attack").asInt());
+      preset.setPetibility(presetObject.get("petibility").asInt());
       setWeaponIfPreset(preset, presetObject);
       preset.setAttackAlgorithmId(AttackAlgorithmId.valueOf(presetObject.get("attackAlgorithmID").asString()));
       creaturePresetMap.add(preset);

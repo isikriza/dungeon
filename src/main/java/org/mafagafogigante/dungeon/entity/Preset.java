@@ -17,6 +17,8 @@ public interface Preset {
 
   Weight getWeight();
 
+  int getPetibility();
+
   Percentage getVisibility();
 
 }
