@@ -734,7 +734,7 @@ public class Hero extends Creature {
     }
     Spell spell = SpellData.getSpellMap().get(book.getSpellId());
     if (getSpellcaster().knowsSpell(spell)) {
-      Writer.write("You already knew 3. level of" + spell.getName().getSingular() + ".");
+      Writer.write("You already knew 3. level of " + spell.getName().getSingular() + ".");
     } else {
       getSpellcaster().learnSpell(spell);
 

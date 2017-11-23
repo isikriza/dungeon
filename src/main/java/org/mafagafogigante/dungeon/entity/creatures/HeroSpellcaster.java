@@ -51,8 +51,10 @@ public class HeroSpellcaster implements Serializable, Spellcaster {
       DungeonLogger.info("Learned " + spell.getName() + ".");
       int random = (int) (Math.random() * 99 + 1);
       if (random <= 90 - (spell.getLevel() * 10) ) {
+        if (spell.getLevel() == 0) {
+          spellList.add(spell);
+        }
         spell.setLevel(spell.getLevel() + 1);
-        spellList.add(spell);
         Writer.write("You learned " + spell.getLevel() + ". level " + spell.getName().getSingular() + ".");
       } else {
         Writer.write("You did no learned " + spell.getName().getSingular() + ".");
