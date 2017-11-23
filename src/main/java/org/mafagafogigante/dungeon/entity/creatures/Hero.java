@@ -87,7 +87,6 @@ public class Hero extends Creature {
   private final AchievementTracker achievementTracker;
   private final Statistics statistics;
   private final Date dateOfBirth;
-  private Creature pet;
   private boolean controlWriterMessages = false;
   private String potType = "";
 
@@ -97,11 +96,6 @@ public class Hero extends Creature {
     this.achievementTracker = new AchievementTracker(statistics);
     this.dateOfBirth = dateOfBirth;
     this.battleLog = new SimpleBattleLog();
-    this.pet = null;
-  }
-
-  public Creature getPet() {
-    return pet;
   }
 
   private static int nextRandomTimeChunk() {
@@ -291,7 +285,7 @@ public class Hero extends Creature {
   public void attackTarget(String[] arguments) {
     Creature target = selectTarget(arguments);
     if (target != null) {
-      Engine.battle(this, target, pet);
+      Engine.battle(this, target);
     }
   }
 
@@ -300,12 +294,16 @@ public class Hero extends Creature {
    */
   public void tameTarget(String[] arguments) {
     Creature target = selectTarget(arguments);
-    if (isReclaimableTarget(target)) {
-      pet = target;
-      Writer.write("You tamed the target.");
-      Writer.write(target.getName().toString() + " is your pet now.");
-    } else {
-      attackTarget(arguments);
+    if (target != null) {
+      if (isReclaimableTarget(target)) {
+        setPet(target);
+        Writer.write("You tamed the target.");
+        Writer.write(target.getName().toString() + " is your pet now.");
+      } else {
+        Writer.write("You failed to tame the target.");
+        Writer.write("The target has attacked you.");
+        Engine.battle(this, target);
+      }
     }
   }
 
@@ -964,8 +962,22 @@ public class Hero extends Creature {
 
       }
     } else {
-      string.append(" You are fighting bare-handed.\n");
+      string.append("You are fighting bare-handed.\n");
     }
+
+    if (hasPet()) {
+      string.append("\n");
+      string.append("You have a pet.\n");
+      string.append("Type: " + getPet().getType() + ".\n");
+      string.append("Name: " + getPet().getName().getSingular() + ".\n");
+      string.append("Health: " + getPet().getHealth().getCurrent() + " (" +
+              getPet().getHealth().getHealthState().toString() + ").\n");
+      string.append("Attack Damage: " + getPet().getAttack() + ".\n");
+    } else {
+      string.append("\n");
+      string.append("You do not have a pet.\n");
+    }
+
     Writer.write(string);
   }
 

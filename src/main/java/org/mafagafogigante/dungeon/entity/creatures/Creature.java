@@ -38,6 +38,7 @@ public class Creature extends Entity {
   private int extraAttackRate;
   BattleLog battleLog = DummyBattleLog.getInstance();
   private Item weapon;
+  private Creature pet;
   private Location location;
   public boolean green;
   public boolean blue;
@@ -197,6 +198,14 @@ public class Creature extends Entity {
     return weapon;
   }
 
+  public Creature getPet() {
+    return pet;
+  }
+
+  public void setPet(Creature pet) {
+    this.pet = pet;
+  }
+
   /**
    * Sets an Item as the currently equipped weapon. The Item must be in this Creature's inventory and have the WEAPON
    * tag.
@@ -241,6 +250,10 @@ public class Creature extends Entity {
 
   boolean hasWeapon() {
     return getWeapon() != null;
+  }
+
+  public boolean hasPet() {
+    return (getPet() != null && getPet().getHealth().isAlive());
   }
 
   /**

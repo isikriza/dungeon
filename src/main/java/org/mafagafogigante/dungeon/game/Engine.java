@@ -108,13 +108,13 @@ public final class Engine {
    * @param hero the attacker
    * @param foe the defender
    */
-  public static void battle(Hero hero, Creature foe, Creature pet) {
+  public static void battle(Hero hero, Creature foe) {
     if (hero == foe) {
       Writer.write(new DungeonString("You cannot attempt suicide."));
       return;
     }
     while (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
-      if (pet == null) {
+      if (!hero.hasPet()) {
         hero.hit(foe);
         Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
         // No contract specifies that calling hit on the Hero will not kill it, so check both creatures again.
@@ -124,16 +124,16 @@ public final class Engine {
           Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
         }
       } else {
-        if (pet.getHealth().isAlive()) {
-          pet.hit(foe);
+        if (hero.getPet().getHealth().isAlive()) {
+          hero.getPet().hit(foe);
           Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
         }
         if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
           hero.hit(foe);
           Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
           if (hero.getHealth().isAlive() && foe.getHealth().isAlive()) {
-            if (pet.getHealth().isAlive()) {
-              foe.hit(pet);
+            if (hero.getPet().getHealth().isAlive()) {
+              foe.hit(hero.getPet());
               Engine.rollDateAndRefresh(BATTLE_TURN_DURATION);
             } else {
               foe.hit(hero);
