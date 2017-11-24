@@ -37,6 +37,7 @@ public final class ItemPreset implements Preset, Serializable {
   private int nutrition;
   private int integrityDecrementOnEat;
   private Weight weight;
+  private int petibility;
   private Percentage visibility;
   private Luminosity luminosity = Luminosity.ZERO;
   private Id spellId;
@@ -151,6 +152,11 @@ public final class ItemPreset implements Preset, Serializable {
     return weight;
   }
 
+  @Override
+  public int getPetibility() {
+    return petibility;
+  }
+
   public void setWeight(Weight weight) {
     this.weight = weight;
   }
@@ -220,4 +226,7 @@ public final class ItemPreset implements Preset, Serializable {
     this.drinkableDoses = doses;
   }
 
+  public void setPetibility(int petibility) {
+    this.petibility = petibility;
+  }
 }

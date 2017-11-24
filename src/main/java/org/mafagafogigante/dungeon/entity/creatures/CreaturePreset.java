@@ -25,6 +25,7 @@ public final class CreaturePreset implements Preset, Serializable {
   private String type;
   private Name name;
   private Weight weight;
+  private int petibility;
   private int health;
   private int attack;
   private AttackAlgorithmId attackAlgorithmId;
@@ -93,6 +94,15 @@ public final class CreaturePreset implements Preset, Serializable {
 
   public Weight getWeight() {
     return weight;
+  }
+
+  public int getPetibility() {
+    return petibility;
+  }
+
+  public void setPetibility(int petibility) {
+    petibility = validate(petibility, 0, "petibility");
+    this.petibility = petibility;
   }
 
   public void setWeight(Weight weight) {

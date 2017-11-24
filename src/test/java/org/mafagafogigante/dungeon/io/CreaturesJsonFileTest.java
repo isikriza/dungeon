@@ -31,6 +31,7 @@ public class CreaturesJsonFileTest extends ResourcesTypeTest {
   private static final String INVENTORY_FIELD = "inventory";
   private static final String LUMINOSITY_FIELD = "luminosity";
   private static final String VISIBILITY_FIELD = "visibility";
+  private static final String PETIBILITY_FIELD = "petibility";
   private static final String ATTACK_ALGORITHM_ID_FIELD = "attackAlgorithmID";
   private static final String INVENTORY_ITEM_LIMIT_FIELD = "inventoryItemLimit";
   private static final String INVENTORY_WEIGHT_LIMIT_FIELD = "inventoryWeightLimit";
@@ -73,6 +74,7 @@ public class CreaturesJsonFileTest extends ResourcesTypeTest {
     creatureRules.put(WEIGHT_FIELD, JsonRuleFactory.makeBoundDoubleRule(Double.MIN_VALUE, Double.MAX_VALUE));
     creatureRules.put(HEALTH_FIELD, integerRule);
     creatureRules.put(ATTACK_FIELD, integerRule);
+    creatureRules.put(PETIBILITY_FIELD, integerRule);
     JsonRule attackAlgorithmEnumRule = JsonRuleFactory.makeEnumJsonRule(AttackAlgorithmId.class);
     creatureRules.put(ATTACK_ALGORITHM_ID_FIELD, attackAlgorithmEnumRule);
     creatureRules.put(WEAPON_FIELD, JsonRuleFactory.makeOptionalRule(idRule));
