@@ -149,7 +149,7 @@ final class CommandSets {
         Game.getGameState().getHero().walk(arguments);
       }
     });
-    commandSet.addCommand(new Command("improve", "Improves the currently equipped weapon's damage with using some materials.") {
+    commandSet.addCommand(new Command("improve", "Improves the currently equipped weapon's damage.") {
       @Override
       public void execute(@NotNull String[] arguments)  {
         Game.getGameState().getHero().improveWeapon(Game.getGameState().getHero(), arguments);
